@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>張庭瑋｜個人品牌與作品集</title>
+  <meta name="description" content="個人品牌首頁與作品集展示網站" />
+
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --border: #e5e7eb;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --radius: 22px;
+      --max-width: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Noto Sans TC",
+        "Microsoft JhengHei",
+        sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(100% - 32px, var(--max-width));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(246, 248, 251, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+    }
+
+    .nav {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-size: 15px;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .hero {
+      padding: 72px 0 48px;
+    }
+
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 32px;
+      background:
+        linear-gradient(
+          120deg,
+          rgba(37, 99, 235, 0.92),
+          rgba(14, 165, 233, 0.82)
+        ),
+        url("banner.jpg") center / cover no-repeat;
+      box-shadow: var(--shadow);
+      min-height: 430px;
+      display: flex;
+      align-items: center;
+      padding: 56px;
+      color: #ffffff;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        circle at top right,
+        rgba(255, 255, 255, 0.35),
+        transparent 34%
+      );
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+    }
+
+    .avatar {
+      width: 128px;
+      height: 128px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid rgba(255, 255, 255, 0.75);
+      box-shadow: 0 18px 35px rgba(15, 23, 42, 0.25);
+      margin-bottom: 24px;
+      background: #ffffff;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 64px);
+      line-height: 1.1;
+      margin-bottom: 16px;
+      letter-spacing: -1.5px;
+    }
+
+    .hero p {
+      font-size: clamp(17px, 2vw, 21px);
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 620px;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: #ffffff;
+      color: var(--primary);
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      color: #ffffff;
+    }
+
+    section {
+      padding: 54px 0;
+    }
+
+    .section-title {
+      margin-bottom: 28px;
+    }
+
+    .section-title small {
+      display: inline-block;
+      color: var(--primary);
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .section-title h2 {
+      font-size: clamp(28px, 4vw, 40px);
+      line-height: 1.25;
+      letter-spacing: -0.8px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 22px;
+    }
+
+    .about-grid {
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: stretch;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.04);
+    }
+
+    .card p {
+      color: var(--muted);
+    }
+
+    .profile-list {
+      display: grid;
+      gap: 14px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .profile-list strong {
+      color: var(--text);
+      display: inline-block;
+      min-width: 86px;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .skill {
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: #eef4ff;
+      color: #1d4ed8;
+      font-weight: 700;
+      font-size: 14px;
+      border: 1px solid #dbeafe;
+    }
+
+    .portfolio-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .project-card {
+      overflow: hidden;
+      padding: 0;
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .project-thumb {
+      height: 170px;
+      background:
+        linear-gradient(135deg, rgba(37, 99, 235, 0.9), rgba(14, 165, 233, 0.75)),
+        url("banner.jpg") center / cover no-repeat;
+    }
+
+    .project-body {
+      padding: 22px;
+    }
+
+    .project-body h3 {
+      margin-bottom: 8px;
+      font-size: 20px;
+    }
+
+    .project-body p {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 16px;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      background: #f3f4f6;
+      border-radius: 999px;
+      padding: 5px 10px;
+    }
+
+    .links-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .link-card {
+      text-align: center;
+      transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    .link-card:hover {
+      transform: translateY(-4px);
+      border-color: #bfdbfe;
+    }
+
+    .link-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 14px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: #eef4ff;
+      color: var(--primary);
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .link-card h3 {
+      font-size: 17px;
+      margin-bottom: 6px;
+    }
+
+    .link-card p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .contact-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 24px;
+      background: linear-gradient(135deg, #111827, #1e3a8a);
+      color: #ffffff;
+      border: none;
+    }
+
+    .contact-card p {
+      color: rgba(255, 255, 255, 0.78);
+      margin-top: 8px;
+    }
+
+    .contact-methods {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .contact-pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 14px;
+    }
+
+    footer {
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: none;
+      background: var(--primary);
+      color: #ffffff;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.3);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px);
+      transition:
+        opacity 0.2s ease,
+        transform 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .back-to-top.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+      background: var(--primary-dark);
+    }
+
+    @media (max-width: 900px) {
+      .nav {
+        height: auto;
+        padding: 18px 0;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+
+      .hero {
+        padding-top: 38px;
+      }
+
+      .hero-card {
+        padding: 42px 30px;
+        min-height: 390px;
+      }
+
+      .about-grid,
+      .portfolio-grid,
+      .links-grid,
+      .contact-card {
+        grid-template-columns: 1fr;
+      }
+
+      .links-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: min(100% - 24px, var(--max-width));
+      }
+
+      .nav-links {
+        gap: 16px;
+        font-size: 14px;
+      }
+
+      .hero-card {
+        border-radius: 24px;
+        padding: 34px 22px;
+      }
+
+      .avatar {
+        width: 104px;
+        height: 104px;
+      }
+
+      section {
+        padding: 42px 0;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .links-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-card {
+        text-align: left;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#" class="logo">My<span>Brand</span></a>
+
+      <nav class="nav-links" aria-label="主要導覽">
+        <a href="#about">關於我</a>
+        <a href="#skills">技能</a>
+        <a href="#portfolio">作品集</a>
+        <a href="#links">連結</a>
+        <a href="#contact">聯絡</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-card">
+          <div class="hero-content">
+            <img src="avatar.jpg" alt="個人頭像" class="avatar" />
+
+            <h1>你好，我是張庭瑋</h1>
+
+            <p>
+              我專注於電子工程、嵌入式系統、感測器應用與地震預警相關技術。
+              這裡整理了我的個人介紹、技能與作品。
+            </p>
+
+            <div class="hero-actions">
+              <a href="#portfolio" class="btn btn-primary">查看作品</a>
+              <a href="#contact" class="btn btn-secondary">聯絡我</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-title">
+          <small>About</small>
+          <h2>關於我</h2>
+        </div>
+
+        <div class="grid about-grid">
+          <div class="card">
+            <p>
+              我是一位對工程實作、感測器系統與資料分析有高度興趣的開發者。
+              喜歡將硬體、軟體與演算法整合成可以實際運作的系統。
+              目前主要關注嵌入式裝置、低成本監測設備、AI 輔助判斷與地震速報應用。
+            </p>
+            <br />
+            <p>
+              我相信好的作品應該兼具實用性、穩定性與清楚的使用體驗。
+              因此在開發過程中，我重視測試、資料驗證與介面設計。
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="profile-list">
+              <div><strong>姓名</strong> 張庭瑋</div>
+              <div><strong>角色</strong> 工程開發 / 研究實作</div>
+              <div><strong>專長</strong> 嵌入式系統、感測器、前端展示</div>
+              <div><strong>所在地</strong> Taiwan</div>
+              <div><strong>Email</strong> hello@example.com</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-title">
+          <small>Skills</small>
+          <h2>技能列表</h2>
+        </div>
+
+        <div class="card">
+          <div class="skills">
+            <span class="skill">HTML</span>
+            <span class="skill">CSS</span>
+            <span class="skill">JavaScript</span>
+            <span class="skill">Python</span>
+            <span class="skill">Arduino</span>
+            <span class="skill">ESP32</span>
+            <span class="skill">STM32</span>
+            <span class="skill">感測器整合</span>
+            <span class="skill">資料分析</span>
+            <span class="skill">WebSocket</span>
+            <span class="skill">AWS</span>
+            <span class="skill">AI Model Deployment</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio">
+      <div class="container">
+        <div class="section-title">
+          <small>Portfolio</small>
+          <h2>作品集</h2>
+        </div>
+
+        <div class="grid portfolio-grid">
+          <article class="card project-card">
+            <div class="project-thumb"></div>
+            <div class="project-body">
+              <h3>地震速報展示網頁</h3>
+              <p>
+                使用前端技術建立即時資訊展示介面，包含地圖、倒數、警示與狀態顯示。
+              </p>
+              <div class="project-tags">
+                <span class="tag">JavaScript</span>
+                <span class="tag">Leaflet</span>
+                <span class="tag">WebSocket</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card project-card">
+            <div class="project-thumb"></div>
+            <div class="project-body">
+              <h3>感測器資料擷取系統</h3>
+              <p>
+                整合 MCU、ADC 與感測器模組，進行資料擷取、濾波與即時分析。
+              </p>
+              <div class="project-tags">
+                <span class="tag">Arduino</span>
+                <span class="tag">ADC</span>
+                <span class="tag">Sensor</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card project-card">
+            <div class="project-thumb"></div>
+            <div class="project-body">
+              <h3>AI 輔助偵測模型</h3>
+              <p>
+                以訊號資料與特徵工程建立模型，用於事件判斷與即時預警研究。
+              </p>
+              <div class="project-tags">
+                <span class="tag">Python</span>
+                <span class="tag">Machine Learning</span>
+                <span class="tag">TFLite</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="links">
+      <div class="container">
+        <div class="section-title">
+          <small>Links</small>
+          <h2>常用連結</h2>
+        </div>
+
+        <div class="grid links-grid">
+          <a href="https://github.com/" target="_blank" rel="noopener" class="card link-card">
+            <div class="link-icon">G</div>
+            <h3>GitHub</h3>
+            <p>程式碼與專案紀錄</p>
+          </a>
+
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener" class="card link-card">
+            <div class="link-icon">in</div>
+            <h3>LinkedIn</h3>
+            <p>個人經歷與職涯資訊</p>
+          </a>
+
+          <a href="#" class="card link-card">
+            <div class="link-icon">B</div>
+            <h3>Blog</h3>
+            <p>技術筆記與文章</p>
+          </a>
+
+          <a href="#" class="card link-card">
+            <div class="link-icon">P</div>
+            <h3>Projects</h3>
+            <p>更多作品與展示頁面</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="card contact-card">
+          <div>
+            <h2>聯絡方式</h2>
+            <p>
+              如果你對我的作品、研究方向或合作有興趣，歡迎透過以下方式聯絡我。
+            </p>
+
+            <div class="contact-methods">
+              <span class="contact-pill">Email：hello@example.com</span>
+              <span class="contact-pill">GitHub：your-github</span>
+              <span class="contact-pill">Location：Taiwan</span>
+            </div>
+          </div>
+
+          <a href="mailto:hello@example.com" class="btn btn-primary">寄信給我</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © <span id="year"></span> 張庭瑋. All rights reserved.
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="回到頂部">
+    ↑
+  </button>
+
+  <script>
+    const year = document.getElementById("year");
+    const backToTop = document.getElementById("backToTop");
+
+    year.textContent = new Date().getFullYear();
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 500) {
+        backToTop.classList.add("show");
+      } else {
+        backToTop.classList.remove("show");
+      }
+    });
+
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  </script>
+</body>
+</html>
