@@ -1,0 +1,60 @@
+.openai-section {
+  padding: 80px 10%;
+  background-color: #f8fafc;
+  text-align: center;
+}
+
+.openai-section h2 {
+  font-size: 32px;
+  margin-bottom: 16px;
+  color: #111827;
+}
+
+.openai-section p {
+  max-width: 780px;
+  margin: 0 auto 32px;
+  line-height: 1.8;
+  font-size: 18px;
+  color: #374151;
+}
+
+.openai-card-container {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.openai-card {
+  width: 320px;
+  padding: 28px;
+  border-radius: 18px;
+  background-color: white;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  text-align: left;
+}
+
+.openai-card h3 {
+  font-size: 24px;
+  margin-bottom: 12px;
+  color: #111827;
+}
+
+.openai-card p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.openai-card a {
+  display: inline-block;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background-color: #4f46e5;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.openai-card a:hover {
+  opacity: 0.85;
+}
